@@ -25,6 +25,11 @@ dl{display:grid;grid-template-columns:7em 1fr;gap:10px 16px;margin:0}
 dt{font-weight:700;color:var(--red)}dd{margin:0}
 .todo{background:#fff;border:2px dashed var(--red);padding:16px 20px;border-radius:8px}
 footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
+.grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-top:5px solid var(--red);border-radius:6px;overflow:hidden}
+.card{padding:18px 20px}.card h3{margin:0;font-size:1.4rem}.card p{margin:4px 0 0}
+.pos{color:var(--red);font-weight:700}
+.note{margin-top:20px;color:#777;font-size:.85rem}
 @media(max-width:480px){dl{grid-template-columns:1fr}dt{margin-top:8px}}
 </style>
 </head>
@@ -35,7 +40,7 @@ footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
     <p>인천을 연고로 하는 KBO 리그 구단. 제가 가장 좋아하는 팀을 소개합니다.</p>
   </div>
 </header>
-<nav><div class="wrap"><a href="#intro">구단 소개</a><a href="#history">우승 기록</a><a href="#home">홈구장</a><a href="#why">내가 좋아하는 이유</a></div></nav>
+<nav><div class="wrap"><a href="#intro">구단 소개</a><a href="#history">우승 기록</a><a href="#home">홈구장</a><a href="#players">선수 목록</a></div></nav>
 
 <section id="intro"><div class="wrap">
   <h2>구단 소개</h2>
@@ -57,12 +62,19 @@ footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
 
 <section id="home"><div class="wrap">
   <h2>홈구장</h2>
-  <p>인천 SSG 랜더스필드(문학)에서 홈경기를 치릅니다. 경기장 정보와 사진은 다음 Sprint에 추가할 예정입니다.</p>
+  <p>인천 SSG 랜더스필드(문학)에서 홈경기를 치릅니다. 청라돔은 2028년 개막 예정입니다.</p>
 </div></section>
 
-<section id="why"><div class="wrap">
-  <h2>내가 좋아하는 이유</h2>
-  <div class="todo">여기에 직접 쓴 이야기를 넣어 주세요. 처음 응원하게 된 계기, 기억에 남는 경기, 좋아하는 선수 등을 적으면 됩니다.</div>
+<section id="players"><div class="wrap">
+  <h2>선수 목록</h2>
+  <ul class="grid">
+    <li class="card"><h3>최정</h3><p class="pos">3루수</p></li>
+    <li class="card"><h3>김광현</h3><p class="pos">투수</p></li>
+    <li class="card"><h3>한유섬</h3><p class="pos">외야수</p></li>
+    <li class="card"><h3>최지훈</h3><p class="pos">외야수 (중견수)</p></li>
+    <li class="card"><h3>박성한</h3><p class="pos">유격수</p></li>
+  </ul>
+  <p class="note">선수단은 시즌 중 바뀔 수 있습니다.</p>
 </div></section>
 
 <footer>Ashley-kr1 · SSG 랜더스 팬페이지 · Sprint 1</footer>
