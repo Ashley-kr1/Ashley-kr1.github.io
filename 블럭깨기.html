@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>블럭깨기</title>
+<style>
+:root{--bg:#f1f3f8;--fg:#1c2233;--sub:#5b6478;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e111a;--fg:#e8ecf5;--sub:#8b93a8}}
+:root[data-theme="dark"]{--bg:#0e111a;--fg:#e8ecf5;--sub:#8b93a8}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden}
+#hud{width:min(92vw,420px);display:flex;justify-content:space-between;font-size:15px;font-weight:600}
+#hud span{color:var(--sub);font-weight:400;margin-right:4px}
+canvas{display:block;width:min(92vw,420px);max-height:calc(100% - 90px);aspect-ratio:3/4;background:#0b0f1c;border-radius:12px;touch-action:none;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+#tip{font-size:12px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div id="hud"><div><span>점수</span><b id="sc">0</b></div><div><span>레벨</span><b id="lv">1</b></div><div><span>목숨</span><b id="li">♥♥♥</b></div></div>
+<canvas id="c" width="480" height="640"></canvas>
+<div id="tip">마우스/터치 드래그 또는 ← → 키로 이동 · 클릭/스페이스로 발사</div>
+<script>
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+const W=480,H=640,COLS=8,ROWS=6,BW=52,BH=20,GAP=6,OX=(W-(COLS*BW+(COLS-1)*GAP))/2,OY=70;
+const COLORS=['#ff5a6e','#ff9f43','#ffd93d','#4cd97b','#4aa8ff','#a77bff'];
+let p,ball,bricks,score,lives,level,state,keys={};
+function build(){bricks=[];for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++)bricks.push({x:OX+c*(BW+GAP),y:OY+r*(BH+GAP),w:BW,h:BH,col:COLORS[r],alive:true,pts:(ROWS-r)*10});}
+function resetBall(){ball={x:p.x+p.w/2,y:p.y-8,vx:0,vy:0,r:7};state='ready';}
+function init(){p={x:W/2-40,y:H-40,w:80,h:12};score=0;lives=3;level=1;build();resetBall();hud();}
+function hud(){sc.textContent=score;lv.textContent=level;li.textContent='♥'.repeat(Math.max(lives,0))||'-';}
+function launch(){
+  if(state==='ready'){const s=6.5+level*.5,a=(Math.random()*40-20)*Math.PI/180;ball.vx=s*Math.sin(a);ball.vy=-s*Math.cos(a);state='play';}
+  else if(state==='over'){init();}
+  else if(state==='win'){level++;build();resetBall();hud();}
+}
+function movePaddle(cx){const r=cv.getBoundingClientRect();p.x=Math.max(0,Math.min(W-p.w,(cx-r.left)*W/r.width-p.w/2));}
+cv.addEventListener('pointermove',e=>movePaddle(e.clientX));
+cv.addEventListener('pointerdown',e=>{movePaddle(e.clientX);launch();});
+addEventListener('keydown',e=>{keys[e.key]=true;if(e.key===' '){e.preventDefault();launch();}if(e.key.startsWith('Arrow'))e.preventDefault();});
+addEventListener('keyup',e=>keys[e.key]=false);
+function update(k){
+  if(keys.ArrowLeft)p.x-=8*k;if(keys.ArrowRight)p.x+=8*k;
+  p.x=Math.max(0,Math.min(W-p.w,p.x));
+  if(state==='ready'){ball.x=p.x+p.w/2;ball.y=p.y-8;return;}
+  if(state!=='play')return;
+  ball.x+=ball.vx*k;ball.y+=ball.vy*k;
+  if(ball.x<ball.r){ball.x=ball.r;ball.vx=Math.abs(ball.vx);}
+  if(ball.x>W-ball.r){ball.x=W-ball.r;ball.vx=-Math.abs(ball.vx);}
+  if(ball.y<ball.r){ball.y=ball.r;ball.vy=Math.abs(ball.vy);}
+  if(ball.vy>0&&ball.y+ball.r>=p.y&&ball.y+ball.r<=p.y+p.h+10&&ball.x>=p.x-4&&ball.x<=p.x+p.w+4){
+    const h=(ball.x-(p.x+p.w/2))/(p.w/2),a=h*60*Math.PI/180,s=Math.hypot(ball.vx,ball.vy);
+    ball.vx=s*Math.sin(a);ball.vy=-s*Math.cos(a);ball.y=p.y-ball.r;
+  }
+  for(const b of bricks){
+    if(!b.alive)continue;
+    if(ball.x+ball.r>b.x&&ball.x-ball.r<b.x+b.w&&ball.y+ball.r>b.y&&ball.y-ball.r<b.y+b.h){
+      const ox=Math.min(ball.x+ball.r-b.x,b.x+b.w-(ball.x-ball.r)),oy=Math.min(ball.y+ball.r-b.y,b.y+b.h-(ball.y-ball.r));
+      if(ox<oy)ball.vx=-ball.vx;else ball.vy=-ball.vy;
+      b.alive=false;score+=b.pts;hud();
+      const s=Math.hypot(ball.vx,ball.vy);if(s<13){ball.vx*=1.01;ball.vy*=1.01;}
+      break;
+    }
+  }
+  if(bricks.every(b=>!b.alive)){state='win';}
+  if(ball.y>H+ball.r){lives--;hud();if(lives<=0)state='over';else resetBall();}
+}
+function rr(x,y,w,h,r){ctx.beginPath();ctx.roundRect?ctx.roundRect(x,y,w,h,r):ctx.rect(x,y,w,h);ctx.fill();}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  for(const b of bricks){if(!b.alive)continue;ctx.fillStyle=b.col;rr(b.x,b.y,b.w,b.h,4);}
+  ctx.fillStyle='#e8ecf5';rr(p.x,p.y,p.w,p.h,6);
+  ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,7);ctx.fillStyle='#fff';ctx.fill();
+  const msg={ready:'클릭 / 스페이스로 발사',over:'게임 오버 — 클릭해서 다시 시작',win:'레벨 클리어! 클릭해서 다음 레벨'}[state];
+  if(msg){ctx.fillStyle='rgba(0,0,0,.45)';ctx.fillRect(0,H/2-4,W,44);ctx.fillStyle='#fff';ctx.font='600 20px sans-serif';ctx.textAlign='center';ctx.fillText(msg,W/2,H/2+25);}
+}
+let last=performance.now();
+function loop(t){const k=Math.min((t-last)/16.67,3);last=t;update(k);draw();requestAnimationFrame(loop);}
+init();requestAnimationFrame(loop);
+</script>
+</body>
+</html>
