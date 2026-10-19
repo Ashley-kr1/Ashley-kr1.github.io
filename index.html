@@ -55,26 +55,6 @@
         "address": { "@type": "PostalAddress", "addressLocality": "인천광역시", "addressCountry": "KR" }
       },
       "url": "https://www.ssglanders.com"
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "SSG 랜더스의 연고지는 어디인가요?",
-          "acceptedAnswer": { "@type": "Answer", "text": "SSG 랜더스는 인천광역시를 연고로 하는 KBO 리그 구단입니다." }
-        },
-        {
-          "@type": "Question",
-          "name": "SSG 랜더스의 한국시리즈 우승 기록은?",
-          "acceptedAnswer": { "@type": "Answer", "text": "SK 와이번스 시절을 포함해 2007, 2008, 2010, 2018년에 우승했습니다. SSG 랜더스로는 2022년 개막전부터 한국시리즈까지 한 번도 1위를 내주지 않은 KBO 최초의 와이어투와이어 통합 우승을 달성했습니다." }
-        },
-        {
-          "@type": "Question",
-          "name": "SSG 랜더스의 홈구장은 어디인가요?",
-          "acceptedAnswer": { "@type": "Answer", "text": "인천 SSG 랜더스필드(문학)에서 홈경기를 치르며, 청라돔은 2028년 개막 예정입니다." }
-        }
-      ]
     }
   ]
 }
@@ -116,6 +96,29 @@ footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
 .card .ph{display:flex;align-items:center;justify-content:center;width:calc(100% + 40px);margin:-18px -20px 14px;aspect-ratio:4/3;background:linear-gradient(135deg,var(--red),#a00a23);color:var(--gold);font-size:2.6rem;font-weight:900;letter-spacing:-.02em}
 .card .no{display:inline-block;background:var(--gold);color:var(--ink);font-weight:900;font-size:.8rem;padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:middle}
 .card .desc{margin:8px 0 0;font-size:.9rem;color:#555;line-height:1.5}
+/* 은퇴 선수 카드: 세피아 톤으로 현역과 구분 */
+.card.retired{border-top-color:#6b6256;background:#f7f4ee;filter:grayscale(.15)}
+.card.retired .ph{background:linear-gradient(135deg,#6b6256,#4a443b);color:#e8dcc5}
+.card.retired .pos{color:#6b6256}
+.card.retired .no{background:#6b6256;color:#f7f4ee}
+.retired-badge{display:inline-block;background:#6b6256;color:#fff;font-size:.72rem;font-weight:900;padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:middle}
+.subhead{margin:28px 0 12px;font-size:1.05rem;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px}
+.subhead::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--red)}
+.subhead.retired-head::before{background:#6b6256}
+/* 선수 추천 시스템 */
+.rec{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px}
+.rec .step{margin-bottom:18px}
+.rec .q{font-weight:800;margin:0 0 10px}
+.rec .opts{display:flex;flex-wrap:wrap;gap:10px}
+.rec button.opt{font:inherit;cursor:pointer;border:2px solid var(--line);background:#fff;color:var(--ink);font-weight:700;padding:10px 16px;border-radius:999px;transition:all .15s}
+.rec button.opt:hover{border-color:var(--red)}
+.rec button.opt[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.rec .hidden{display:none}
+.rec .result{margin-top:20px;border:2px solid var(--gold);border-radius:10px;padding:18px 20px;background:#fffdf3}
+.rec .result h3{margin:0 0 4px;font-size:1.5rem}
+.rec .result .pos{color:var(--red);font-weight:700}
+.rec .result .why{margin:10px 0 0;color:#444;font-size:.95rem;line-height:1.6}
+.rec .reset{margin-top:14px;background:none;border:none;color:var(--red);font-weight:700;cursor:pointer;text-decoration:underline;padding:0}
 .links{margin:0;padding-left:1.2em}.links a{color:var(--red);font-weight:700}
 .note{margin-top:20px;color:#777;font-size:.85rem}
 .table-wrap{overflow-x:auto}
@@ -124,13 +127,7 @@ th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);whit
 thead th{background:var(--ink);color:var(--gold)}
 tbody tr:hover{background:#fff6f7}
 .win{color:var(--red);font-weight:700}.loss{color:#888;font-weight:700}
-.faq{margin:0;padding:0}
-.faq details{background:#fff;border:1px solid var(--line);border-left:5px solid var(--red);border-radius:6px;margin-bottom:10px;padding:0 16px}
-.faq summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::before{content:"Q. ";color:var(--red);font-weight:900}
-.faq details[open] summary{color:var(--red)}
-.faq p{margin:0 0 14px;color:#444}
+
 @media(max-width:480px){dl{grid-template-columns:1fr}dt{margin-top:8px}}
 </style>
 </head>
@@ -141,7 +138,7 @@ tbody tr:hover{background:#fff6f7}
     <p>인천을 연고로 하는 KBO 리그 구단. 제가 가장 좋아하는 팀을 소개합니다.</p>
   </div>
 </header>
-<nav><div class="wrap"><a href="#intro">구단 소개</a><a href="#history">우승 기록</a><a href="#home">홈구장</a><a href="#players">선수 목록</a><a href="#schedule">경기 일정</a><a href="#highlight">하이라이트</a><a href="#faq">자주 묻는 질문</a><a href="#official">공식 페이지</a></div></nav>
+<nav><div class="wrap"><a href="#intro">구단 소개</a><a href="#history">우승 기록</a><a href="#home">홈구장</a><a href="#players">선수 목록</a><a href="#recommender">선수 추천</a><a href="#schedule">경기 일정</a><a href="#highlight">하이라이트</a><a href="#official">공식 페이지</a></div></nav>
 
 <section id="intro"><div class="wrap">
   <h2>구단 소개</h2>
@@ -178,6 +175,8 @@ tbody tr:hover{background:#fff6f7}
 
 <section id="players"><div class="wrap">
   <h2>선수 목록</h2>
+
+  <p class="subhead">현역 선수</p>
   <ul class="grid">
     <li class="card"><img src="choi-jeong.jpg" alt="최정 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;최정&lt;/div&gt;'"><h3>최정<span class="no">14</span></h3><p class="pos">3루수</p><p class="desc">SSG의 프랜차이즈 거포. KBO를 대표하는 3루수로 통산 홈런 기록을 꾸준히 쌓아온 간판타자입니다.</p></li>
     <li class="card"><img src="kk.jpg" alt="김광현 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;김광현&lt;/div&gt;'"><h3>김광현<span class="no">29</span></h3><p class="pos">투수</p><p class="desc">인천을 대표하는 좌완 에이스. 메이저리그를 거쳐 SSG로 복귀한 팀의 정신적 지주입니다.</p></li>
@@ -185,7 +184,35 @@ tbody tr:hover{background:#fff6f7}
     <li class="card"><img src="choi-jihoon.jpg" alt="최지훈 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;최지훈&lt;/div&gt;'"><h3>최지훈<span class="no">54</span></h3><p class="pos">외야수 (중견수)</p><p class="desc">넓은 수비 범위와 빠른 발을 갖춘 리드오프형 중견수입니다.</p></li>
     <li class="card"><img src="park-sunghan.jpg" alt="박성한 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;박성한&lt;/div&gt;'"><h3>박성한<span class="no">2</span></h3><p class="pos">유격수</p><p class="desc">안정적인 수비와 정교한 타격을 겸비한 주전 유격수입니다.</p></li>
   </ul>
-  <p class="note">선수단과 등번호는 시즌 중 바뀔 수 있습니다. 선수 사진 파일을 추가하면 플레이스홀더 대신 사진이 표시됩니다.</p>
+
+  <p class="subhead retired-head">은퇴 선수 (레전드)</p>
+  <ul class="grid">
+    <li class="card retired"><img src="park-kyungwan.jpg" alt="박경완 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;박경완&lt;/div&gt;'"><h3>박경완<span class="retired-badge">은퇴</span></h3><p class="pos">포수</p><p class="desc">KBO를 대표하는 명포수로, 투수 리드와 수비 능력에서 최고로 꼽히던 인천 야구의 레전드입니다.</p></li>
+    <li class="card retired"><img src="kim-kangmin.jpg" alt="김강민 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;김강민&lt;/div&gt;'"><h3>김강민<span class="retired-badge">은퇴</span></h3><p class="pos">외야수 (중견수)</p><p class="desc">'짐승' 중견수로 불린 수비의 달인. 2022년 한국시리즈 극적인 홈런으로 팬들에게 깊은 인상을 남겼습니다.</p></li>
+    <li class="card retired"><img src="choo-shinsoo.jpg" alt="추신수 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;추신수&lt;/div&gt;'"><h3>추신수<span class="retired-badge">은퇴</span></h3><p class="pos">외야수</p><p class="desc">메이저리그를 거쳐 SSG에서 활약한 교타자. 뛰어난 출루 능력과 선구안을 갖춘 리드오프형 외야수였습니다.</p></li>
+  </ul>
+
+  <p class="note">현역 선수(레드)와 은퇴 선수(세피아)를 색으로 구분했습니다. 선수단과 등번호는 시즌 중 바뀔 수 있으며, 선수 사진 파일을 추가하면 플레이스홀더 대신 사진이 표시됩니다.</p>
+</div></section>
+
+<section id="recommender"><div class="wrap">
+  <h2>맞춤형 선수 추천</h2>
+  <p>원하는 유형을 고르면 어울리는 SSG 선수를 추천해 드립니다.</p>
+  <div class="rec">
+    <div class="step" id="step1">
+      <p class="q">1. 어떤 포지션을 찾으세요?</p>
+      <div class="opts">
+        <button class="opt" type="button" data-type="pitcher" aria-pressed="false">투수</button>
+        <button class="opt" type="button" data-type="batter" aria-pressed="false">야수</button>
+      </div>
+    </div>
+    <div class="step hidden" id="step2">
+      <p class="q">2. 선호하는 유형을 고르세요.</p>
+      <div class="opts" id="style-opts"></div>
+    </div>
+    <div class="result hidden" id="rec-result" role="status" aria-live="polite"></div>
+    <button class="reset hidden" type="button" id="rec-reset">처음부터 다시 선택</button>
+  </div>
 </div></section>
 
 <section id="schedule"><div class="wrap">
@@ -213,24 +240,6 @@ tbody tr:hover{background:#fff6f7}
   </ul>
 </div></section>
 
-<section id="faq"><div class="wrap">
-  <h2>자주 묻는 질문</h2>
-  <div class="faq">
-    <details open>
-      <summary>SSG 랜더스의 연고지는 어디인가요?</summary>
-      <p>SSG 랜더스는 인천광역시를 연고로 하는 KBO 리그 구단입니다.</p>
-    </details>
-    <details>
-      <summary>SSG 랜더스의 한국시리즈 우승 기록은?</summary>
-      <p>SK 와이번스 시절을 포함해 2007, 2008, 2010, 2018년에 우승했습니다. SSG 랜더스로는 2022년 개막전부터 한국시리즈까지 한 번도 1위를 내주지 않은 KBO 최초의 와이어투와이어 통합 우승을 달성했습니다.</p>
-    </details>
-    <details>
-      <summary>SSG 랜더스의 홈구장은 어디인가요?</summary>
-      <p>인천 SSG 랜더스필드(문학)에서 홈경기를 치르며, 청라돔은 2028년 개막 예정입니다.</p>
-    </details>
-  </div>
-</div></section>
-
 <section id="official"><div class="wrap">
   <h2>공식 페이지</h2>
   <ul class="links">
@@ -241,5 +250,93 @@ tbody tr:hover{background:#fff6f7}
 </div></section>
 
 <footer>Ashley-kr1 · SSG 랜더스 팬페이지 · Sprint 1</footer>
+
+<script>
+(function(){
+  // 유형별 선수 데이터
+  var DATA = {
+    pitcher: {
+      label: "투수",
+      styles: [
+        { key:"fastball", label:"직구형", player:"김광현", pos:"좌완 투수",
+          why:"묵직한 직구와 풍부한 경험을 앞세우는 좌완 에이스로, 정면 승부를 즐기는 직구형 투수를 찾는다면 김광현이 제격입니다." },
+        { key:"breaking", label:"변화구(슬라이더)형", player:"오원석", pos:"좌완 투수",
+          why:"날카로운 변화구로 타자의 타이밍을 빼앗는 유형으로, 슬라이더 등 변화구 중심 투수를 원한다면 좋은 선택입니다." },
+        { key:"power", label:"파워피처(탈삼진)형", player:"김광현", pos:"좌완 투수",
+          why:"위기 상황에서 삼진을 잡아내는 구위를 갖춘 투수로, 탈삼진 능력을 중시한다면 김광현을 추천합니다." }
+      ]
+    },
+    batter: {
+      label: "야수",
+      styles: [
+        { key:"homerun", label:"홈런타자형", player:"최정", pos:"3루수",
+          why:"KBO를 대표하는 거포로 통산 홈런 기록을 꾸준히 쌓아온 간판타자입니다. 한 방을 원한다면 최정입니다." },
+        { key:"average", label:"안타·교타자형", player:"추신수 (은퇴)", pos:"외야수",
+          why:"정교한 콘택트와 선구안을 갖춘 교타자 유형입니다. 꾸준한 안타 생산을 원한다면 추신수 스타일이 어울립니다." },
+        { key:"steal", label:"도루·발야구형", player:"최지훈", pos:"외야수(중견수)",
+          why:"빠른 발과 넓은 수비 범위를 갖춘 리드오프형 선수로, 기동력을 중시한다면 최지훈을 추천합니다." },
+        { key:"onbase", label:"출루율형", player:"추신수 (은퇴)", pos:"외야수",
+          why:"뛰어난 출루 능력과 참을성 있는 타격을 갖춘 리드오프 유형입니다. 출루를 최우선으로 본다면 추신수 스타일입니다." },
+        { key:"defense", label:"수비형", player:"김강민 (은퇴)", pos:"외야수(중견수)",
+          why:"'짐승' 중견수로 불린 수비의 달인입니다. 수비를 가장 중시한다면 김강민 스타일을 추천합니다." }
+      ]
+    }
+  };
+
+  var step1 = document.getElementById('step1');
+  var step2 = document.getElementById('step2');
+  var styleOpts = document.getElementById('style-opts');
+  var resultBox = document.getElementById('rec-result');
+  var resetBtn = document.getElementById('rec-reset');
+  var currentType = null;
+
+  function clearPressed(container){
+    container.querySelectorAll('button.opt').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+  }
+
+  // 1단계: 투수/야수 선택
+  step1.querySelectorAll('button.opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      currentType = btn.getAttribute('data-type');
+      clearPressed(step1);
+      btn.setAttribute('aria-pressed','true');
+      // 2단계 옵션 생성
+      styleOpts.innerHTML = '';
+      DATA[currentType].styles.forEach(function(s){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'opt'; b.textContent = s.label;
+        b.setAttribute('aria-pressed','false');
+        b.addEventListener('click', function(){
+          clearPressed(styleOpts);
+          b.setAttribute('aria-pressed','true');
+          showResult(s);
+        });
+        styleOpts.appendChild(b);
+      });
+      step2.classList.remove('hidden');
+      resultBox.classList.add('hidden');
+      resetBtn.classList.remove('hidden');
+    });
+  });
+
+  function showResult(s){
+    resultBox.innerHTML =
+      '<p style="margin:0;font-size:.85rem;color:#777;">추천 선수</p>' +
+      '<h3>' + s.player + '</h3>' +
+      '<p class="pos">' + s.pos + ' · ' + s.label + '</p>' +
+      '<p class="why">' + s.why + '</p>';
+    resultBox.classList.remove('hidden');
+  }
+
+  resetBtn.addEventListener('click', function(){
+    currentType = null;
+    clearPressed(step1);
+    styleOpts.innerHTML = '';
+    step2.classList.add('hidden');
+    resultBox.classList.add('hidden');
+    resetBtn.classList.add('hidden');
+  });
+})();
+</script>
 </body>
 </html>
