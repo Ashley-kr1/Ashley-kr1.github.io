@@ -18,14 +18,16 @@
 <meta property="og:title" content="SSG 랜더스 팬페이지 | 인천 KBO 구단">
 <meta property="og:description" content="인천 연고 KBO 구단 SSG 랜더스의 소개, 우승 기록, 홈구장, 선수, 하이라이트를 정리한 팬페이지.">
 <meta property="og:url" content="https://ashley-kr1.github.io/">
-<meta property="og:image" content="https://ashley-kr1.github.io/og-image.jpg">
+<meta property="og:image" content="https://ashley-kr1.github.io/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="ko_KR">
 
 <!-- ===== Twitter Card ===== -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SSG 랜더스 팬페이지 | 인천 KBO 구단">
 <meta name="twitter:description" content="인천 연고 KBO 구단 SSG 랜더스의 소개, 우승 기록, 홈구장, 선수, 하이라이트를 정리한 팬페이지.">
-<meta name="twitter:image" content="https://ashley-kr1.github.io/og-image.jpg">
+<meta name="twitter:image" content="https://ashley-kr1.github.io/og-image.svg">
 
 <!-- ===== GEO: 구조화 데이터 (JSON-LD) — AI·검색엔진 이해도 향상 ===== -->
 <script type="application/ld+json">
@@ -104,8 +106,24 @@ footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
 .card{padding:18px 20px}.card h3{margin:0;font-size:1.4rem}.card p{margin:4px 0 0}
 .pos{color:var(--red);font-weight:700}
 .card img{display:block;width:calc(100% + 40px);max-width:none;margin:-18px -20px 14px;aspect-ratio:4/3;object-fit:cover}
+.card .ph{display:flex;align-items:center;justify-content:center;width:calc(100% + 40px);margin:-18px -20px 14px;aspect-ratio:4/3;background:linear-gradient(135deg,var(--red),#a00a23);color:var(--gold);font-size:2.6rem;font-weight:900;letter-spacing:-.02em}
+.card .no{display:inline-block;background:var(--gold);color:var(--ink);font-weight:900;font-size:.8rem;padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:middle}
+.card .desc{margin:8px 0 0;font-size:.9rem;color:#555;line-height:1.5}
 .links{margin:0;padding-left:1.2em}.links a{color:var(--red);font-weight:700}
 .note{margin-top:20px;color:#777;font-size:.85rem}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.95rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+thead th{background:var(--ink);color:var(--gold)}
+tbody tr:hover{background:#fff6f7}
+.win{color:var(--red);font-weight:700}.loss{color:#888;font-weight:700}
+.faq{margin:0;padding:0}
+.faq details{background:#fff;border:1px solid var(--line);border-left:5px solid var(--red);border-radius:6px;margin-bottom:10px;padding:0 16px}
+.faq summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q. ";color:var(--red);font-weight:900}
+.faq details[open] summary{color:var(--red)}
+.faq p{margin:0 0 14px;color:#444}
 @media(max-width:480px){dl{grid-template-columns:1fr}dt{margin-top:8px}}
 </style>
 </head>
@@ -116,7 +134,7 @@ footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
     <p>인천을 연고로 하는 KBO 리그 구단. 제가 가장 좋아하는 팀을 소개합니다.</p>
   </div>
 </header>
-<nav><div class="wrap"><a href="#intro">구단 소개</a><a href="#history">우승 기록</a><a href="#home">홈구장</a><a href="#players">선수 목록</a><a href="#highlight">하이라이트</a><a href="#official">공식 페이지</a></div></nav>
+<nav><div class="wrap"><a href="#intro">구단 소개</a><a href="#history">우승 기록</a><a href="#home">홈구장</a><a href="#players">선수 목록</a><a href="#schedule">경기 일정</a><a href="#highlight">하이라이트</a><a href="#faq">자주 묻는 질문</a><a href="#official">공식 페이지</a></div></nav>
 
 <section id="intro"><div class="wrap">
   <h2>구단 소개</h2>
@@ -144,13 +162,29 @@ footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
 <section id="players"><div class="wrap">
   <h2>선수 목록</h2>
   <ul class="grid">
-    <li class="card"><img src="choi-jeong.jpg" alt="최정 선수 사진" onerror="this.remove()"><h3>최정</h3><p class="pos">3루수</p></li>
-    <li class="card"><img src="kk.jpg" alt="김광현 선수 사진" onerror="this.remove()"><h3>김광현</h3><p class="pos">투수</p></li>
-    <li class="card"><img src="han-yoosub.jpg" alt="한유섬 선수 사진" onerror="this.remove()"><h3>한유섬</h3><p class="pos">외야수</p></li>
-    <li class="card"><img src="choi-jihoon.jpg" alt="최지훈 선수 사진" onerror="this.remove()"><h3>최지훈</h3><p class="pos">외야수 (중견수)</p></li>
-    <li class="card"><img src="park-sunghan.jpg" alt="박성한 선수 사진" onerror="this.remove()"><h3>박성한</h3><p class="pos">유격수</p></li>
+    <li class="card"><img src="choi-jeong.jpg" alt="최정 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;최정&lt;/div&gt;'"><h3>최정<span class="no">14</span></h3><p class="pos">3루수</p><p class="desc">SSG의 프랜차이즈 거포. KBO를 대표하는 3루수로 통산 홈런 기록을 꾸준히 쌓아온 간판타자입니다.</p></li>
+    <li class="card"><img src="kk.jpg" alt="김광현 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;김광현&lt;/div&gt;'"><h3>김광현<span class="no">29</span></h3><p class="pos">투수</p><p class="desc">인천을 대표하는 좌완 에이스. 메이저리그를 거쳐 SSG로 복귀한 팀의 정신적 지주입니다.</p></li>
+    <li class="card"><img src="han-yoosub.jpg" alt="한유섬 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;한유섬&lt;/div&gt;'"><h3>한유섬<span class="no">35</span></h3><p class="pos">외야수</p><p class="desc">장타력을 갖춘 중심 타선의 외야수로 꾸준한 생산력을 보여줍니다.</p></li>
+    <li class="card"><img src="choi-jihoon.jpg" alt="최지훈 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;최지훈&lt;/div&gt;'"><h3>최지훈<span class="no">54</span></h3><p class="pos">외야수 (중견수)</p><p class="desc">넓은 수비 범위와 빠른 발을 갖춘 리드오프형 중견수입니다.</p></li>
+    <li class="card"><img src="park-sunghan.jpg" alt="박성한 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;박성한&lt;/div&gt;'"><h3>박성한<span class="no">2</span></h3><p class="pos">유격수</p><p class="desc">안정적인 수비와 정교한 타격을 겸비한 주전 유격수입니다.</p></li>
   </ul>
-  <p class="note">선수단은 시즌 중 바뀔 수 있습니다.</p>
+  <p class="note">선수단과 등번호는 시즌 중 바뀔 수 있습니다. 선수 사진 파일을 추가하면 플레이스홀더 대신 사진이 표시됩니다.</p>
+</div></section>
+
+<section id="schedule"><div class="wrap">
+  <h2>최근 경기 결과</h2>
+  <p>인천 SSG 랜더스필드에서 열린 최근 홈경기 결과입니다.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>날짜</th><th>상대</th><th>장소</th><th>결과</th></tr></thead>
+      <tbody>
+        <tr><td>2026-10-09 (금)</td><td>삼성 라이온즈</td><td>인천 (홈)</td><td class="win">승 3-1</td></tr>
+        <tr><td>2026-10-07 (수)</td><td>LG 트윈스</td><td>인천 (홈)</td><td class="win">승 5-4</td></tr>
+        <tr><td>2026-10-05 (월)</td><td>KIA 타이거즈</td><td>광주 (원정)</td><td class="loss">패 2-6</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">※ 위 일정은 예시 데이터입니다. 실제 경기 결과는 공식 페이지에서 확인하세요. 경기 결과를 주기적으로 업데이트하면 검색 노출에 도움이 됩니다.</p>
 </div></section>
 
 <section id="highlight"><div class="wrap">
@@ -160,6 +194,24 @@ footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
     <li><a href="https://www.youtube.com/results?search_query=SSG%20%EB%9E%9C%EB%8D%94%EC%8A%A4%20%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8" target="_blank" rel="noopener">유튜브에서 최신 하이라이트 찾아보기</a></li>
     <li><a href="https://sports.khan.co.kr/article/202610091631003/" target="_blank" rel="noopener">경기 기사 보기 (스포츠경향)</a></li>
   </ul>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <h2>자주 묻는 질문</h2>
+  <div class="faq">
+    <details open>
+      <summary>SSG 랜더스의 연고지는 어디인가요?</summary>
+      <p>SSG 랜더스는 인천광역시를 연고로 하는 KBO 리그 구단입니다.</p>
+    </details>
+    <details>
+      <summary>SSG 랜더스의 한국시리즈 우승 기록은?</summary>
+      <p>SK 와이번스 시절을 포함해 2007, 2008, 2010, 2018년에 우승했고, SSG 랜더스로는 2022년 정규시즌 1위와 한국시리즈 우승을 모두 차지했습니다.</p>
+    </details>
+    <details>
+      <summary>SSG 랜더스의 홈구장은 어디인가요?</summary>
+      <p>인천 SSG 랜더스필드(문학)에서 홈경기를 치르며, 청라돔은 2028년 개막 예정입니다.</p>
+    </details>
+  </div>
 </div></section>
 
 <section id="official"><div class="wrap">
