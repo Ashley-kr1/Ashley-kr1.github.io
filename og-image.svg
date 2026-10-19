@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="SSG 랜더스 팬페이지">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ce0e2d"/>
+      <stop offset="1" stop-color="#a00a23"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="610" width="1200" height="20" fill="#f2b705"/>
+  <text x="80" y="250" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="110" font-weight="900" fill="#ffffff" letter-spacing="-3">SSG 랜더스</text>
+  <text x="84" y="330" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="44" font-weight="700" fill="#f2b705">인천 · KBO 리그 팬페이지</text>
+  <text x="84" y="400" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="30" fill="#ffd9df">구단 소개 · 우승 기록 · 홈구장 · 선수 · 하이라이트</text>
+  <g font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="30" font-weight="900" fill="#1c1b1b">
+    <rect x="84" y="450" width="130" height="56" rx="28" fill="#f2b705"/><text x="110" y="488">2007</text>
+    <rect x="228" y="450" width="130" height="56" rx="28" fill="#f2b705"/><text x="254" y="488">2008</text>
+    <rect x="372" y="450" width="130" height="56" rx="28" fill="#f2b705"/><text x="398" y="488">2010</text>
+    <rect x="516" y="450" width="130" height="56" rx="28" fill="#f2b705"/><text x="542" y="488">2018</text>
+    <rect x="660" y="450" width="130" height="56" rx="28" fill="#f2b705"/><text x="686" y="488">2022</text>
+  </g>
+</svg>
