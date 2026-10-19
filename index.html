@@ -183,6 +183,7 @@ tbody tr:hover{background:#fff6f7}
     <li class="card"><img src="han-yoosub.jpg" alt="한유섬 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;한유섬&lt;/div&gt;'"><h3>한유섬<span class="no">35</span></h3><p class="pos">외야수</p><p class="desc">장타력을 갖춘 중심 타선의 외야수로 꾸준한 생산력을 보여줍니다.</p></li>
     <li class="card"><img src="choi-jihoon.jpg" alt="최지훈 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;최지훈&lt;/div&gt;'"><h3>최지훈<span class="no">54</span></h3><p class="pos">외야수 (중견수)</p><p class="desc">넓은 수비 범위와 빠른 발을 갖춘 리드오프형 중견수입니다.</p></li>
     <li class="card"><img src="park-sunghan.jpg" alt="박성한 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;박성한&lt;/div&gt;'"><h3>박성한<span class="no">2</span></h3><p class="pos">유격수</p><p class="desc">안정적인 수비와 정교한 타격을 겸비한 주전 유격수입니다.</p></li>
+    <li class="card"><img src="jo-byunghyun.jpg" alt="조병현 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;조병현&lt;/div&gt;'"><h3>조병현</h3><p class="pos">투수 (마무리)</p><p class="desc">리그 정상급 마무리 투수로, 빠른 공과 탈삼진 능력을 갖춘 뒷문의 핵심입니다.</p></li>
   </ul>
 
   <p class="subhead retired-head">은퇴 선수 (레전드)</p>
@@ -254,16 +255,17 @@ tbody tr:hover{background:#fff6f7}
 <script>
 (function(){
   // 유형별 선수 데이터
+  // 2026 시즌 기준 현역 SSG 랜더스 선수만 추천 (은퇴·이적 선수 제외)
   var DATA = {
     pitcher: {
       label: "투수",
       styles: [
         { key:"fastball", label:"직구형", player:"김광현", pos:"좌완 투수",
-          why:"묵직한 직구와 풍부한 경험을 앞세우는 좌완 에이스로, 정면 승부를 즐기는 직구형 투수를 찾는다면 김광현이 제격입니다." },
-        { key:"breaking", label:"변화구(슬라이더)형", player:"오원석", pos:"좌완 투수",
-          why:"날카로운 변화구로 타자의 타이밍을 빼앗는 유형으로, 슬라이더 등 변화구 중심 투수를 원한다면 좋은 선택입니다." },
-        { key:"power", label:"파워피처(탈삼진)형", player:"김광현", pos:"좌완 투수",
-          why:"위기 상황에서 삼진을 잡아내는 구위를 갖춘 투수로, 탈삼진 능력을 중시한다면 김광현을 추천합니다." }
+          why:"묵직한 직구와 풍부한 경험을 앞세우는 좌완 에이스입니다. 정면 승부를 즐기는 직구형 투수를 찾는다면 김광현이 제격입니다." },
+        { key:"breaking", label:"변화구(슬라이더)형", player:"김광현", pos:"좌완 투수",
+          why:"직구와 슬라이더 조합으로 타자의 타이밍을 빼앗는 피칭을 구사합니다. 변화구 운영이 뛰어난 투수를 원한다면 김광현을 추천합니다." },
+        { key:"power", label:"파워피처(마무리)형", player:"조병현", pos:"우완 마무리 투수",
+          why:"위기 상황을 힘으로 틀어막는 리그 정상급 마무리 투수입니다. 빠른 공과 탈삼진 능력을 중시한다면 조병현이 제격입니다." }
       ]
     },
     batter: {
@@ -271,14 +273,14 @@ tbody tr:hover{background:#fff6f7}
       styles: [
         { key:"homerun", label:"홈런타자형", player:"최정", pos:"3루수",
           why:"KBO를 대표하는 거포로 통산 홈런 기록을 꾸준히 쌓아온 간판타자입니다. 한 방을 원한다면 최정입니다." },
-        { key:"average", label:"안타·교타자형", player:"추신수 (은퇴)", pos:"외야수",
-          why:"정교한 콘택트와 선구안을 갖춘 교타자 유형입니다. 꾸준한 안타 생산을 원한다면 추신수 스타일이 어울립니다." },
+        { key:"average", label:"안타·교타자형", player:"박성한", pos:"유격수",
+          why:"정교한 콘택트와 선구안을 갖춘 교타자형 내야수입니다. 꾸준한 안타 생산을 원한다면 박성한을 추천합니다." },
         { key:"steal", label:"도루·발야구형", player:"최지훈", pos:"외야수(중견수)",
-          why:"빠른 발과 넓은 수비 범위를 갖춘 리드오프형 선수로, 기동력을 중시한다면 최지훈을 추천합니다." },
-        { key:"onbase", label:"출루율형", player:"추신수 (은퇴)", pos:"외야수",
-          why:"뛰어난 출루 능력과 참을성 있는 타격을 갖춘 리드오프 유형입니다. 출루를 최우선으로 본다면 추신수 스타일입니다." },
-        { key:"defense", label:"수비형", player:"김강민 (은퇴)", pos:"외야수(중견수)",
-          why:"'짐승' 중견수로 불린 수비의 달인입니다. 수비를 가장 중시한다면 김강민 스타일을 추천합니다." }
+          why:"빠른 발과 넓은 수비 범위를 갖춘 리드오프형 선수입니다. 기동력을 중시한다면 최지훈이 어울립니다." },
+        { key:"onbase", label:"출루율형", player:"박성한", pos:"유격수",
+          why:"참을성 있는 타격과 좋은 선구안으로 출루를 만들어내는 유형입니다. 출루를 최우선으로 본다면 박성한을 추천합니다." },
+        { key:"defense", label:"수비형", player:"최지훈", pos:"외야수(중견수)",
+          why:"넓은 수비 범위와 안정적인 중견수 수비를 자랑합니다. 수비를 가장 중시한다면 최지훈이 좋은 선택입니다." }
       ]
     }
   };
