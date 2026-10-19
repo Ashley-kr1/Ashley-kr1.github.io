@@ -67,8 +67,12 @@ body{margin:0;font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",s
 .hero{background:var(--red);color:#fff;padding:72px 24px 56px;position:relative;overflow:hidden}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:var(--gold)}
 .wrap{max-width:760px;margin:0 auto}
+.hero .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px}
+.hero .headline{flex:1 1 auto;min-width:0}
 .hero h1{font-size:clamp(2.4rem,9vw,4.6rem);line-height:1.05;margin:0 0 16px;font-weight:900;letter-spacing:-.03em}
 .hero p{font-size:1.1rem;margin:0;max-width:30em;opacity:.95}
+.hero .logo{flex:0 0 auto;width:clamp(96px,22vw,150px);height:auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
+@media(max-width:560px){.hero .wrap{flex-direction:column-reverse;align-items:flex-start;gap:18px}.hero .logo{width:92px}}
 nav{position:sticky;top:0;background:var(--paper);border-bottom:1px solid var(--line);z-index:5}
 nav .wrap{display:flex;gap:20px;padding:12px 24px;overflow-x:auto}
 nav a{color:var(--ink);text-decoration:none;font-weight:700;white-space:nowrap}
@@ -134,8 +138,18 @@ tbody tr:hover{background:#fff6f7}
 <body>
 <header class="hero">
   <div class="wrap">
-    <h1>SSG 랜더스</h1>
-    <p>인천을 연고로 하는 KBO 리그 구단. 제가 가장 좋아하는 팀을 소개합니다.</p>
+    <div class="headline">
+      <h1>SSG 랜더스</h1>
+      <p>인천을 연고로 하는 KBO 리그 구단. 제가 가장 좋아하는 팀을 소개합니다.</p>
+    </div>
+    <svg class="logo" viewBox="0 0 150 150" role="img" aria-label="SSG 랜더스 팬페이지 엠블럼" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="75" cy="75" r="72" fill="#ffffff"/>
+      <circle cx="75" cy="75" r="72" fill="none" stroke="#f2b705" stroke-width="6"/>
+      <circle cx="75" cy="75" r="60" fill="#ce0e2d"/>
+      <text x="75" y="78" text-anchor="middle" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="40" font-weight="900" fill="#ffffff" letter-spacing="1">SSG</text>
+      <text x="75" y="104" text-anchor="middle" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="15" font-weight="700" fill="#f2b705" letter-spacing="3">LANDERS</text>
+      <path d="M40 118 L75 132 L110 118" fill="none" stroke="#f2b705" stroke-width="4" stroke-linecap="round"/>
+    </svg>
   </div>
 </header>
 <nav><div class="wrap"><a href="#intro">구단 소개</a><a href="#history">우승 기록</a><a href="#home">홈구장</a><a href="#players">선수 목록</a><a href="#recommender">선수 추천</a><a href="#schedule">경기 일정</a><a href="#highlight">하이라이트</a><a href="#official">공식 페이지</a></div></nav>
