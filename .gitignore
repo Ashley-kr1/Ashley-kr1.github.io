@@ -1,0 +1,24 @@
+# 비밀/환경 변수 (절대 커밋 금지)
+.env
+.env.*
+!.env.example
+
+# 의존성
+node_modules/
+
+# 빌드 산출물 (배포 시 재생성됨)
+publish/
+
+# Netlify 로컬 상태
+.netlify/
+
+# Kiro 개인 설정/기록
+.kiro/
+
+# 개인 기록 메모
+llms.txt
+
+# OS/에디터 잡파일
+.DS_Store
+Thumbs.db
+*.log
