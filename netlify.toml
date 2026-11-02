@@ -9,13 +9,10 @@
   # 서버리스 함수 폴더. publish 폴더 바깥에 있어 공개 출력에 포함되지 않습니다.
   functions = "netlify/functions"
 
-  # 공개 파일을 publish/로 모으는 스크립트. Node가 없는 환경에서도 동작하도록 PowerShell 사용.
-  # (Netlify 빌드 환경에서는 bash가 기본이므로, Netlify에서 돌릴 경우 build.sh 사용을 권장 — 아래 주석 참고)
-  command = "pwsh -NoProfile -File ./build.ps1"
-
-# Netlify의 Linux 빌드 환경에서는 PowerShell 대신 bash 스크립트가 더 안전합니다.
-# Git 연동 배포로 Netlify에서 직접 빌드한다면 위 command를 "bash ./build.sh" 로 바꾸세요.
-# (build.sh도 이 저장소에 포함해 두었습니다.)
+  # 공개 파일을 publish/로 모으는 스크립트.
+  # Netlify 빌드 환경은 Linux이므로 bash 스크립트를 사용합니다.
+  # (Windows 로컬에서 빌드를 재현하려면 build.ps1을 직접 실행하세요.)
+  command = "bash ./build.sh"
 
 [functions]
   # Node 기반 함수 런타임
