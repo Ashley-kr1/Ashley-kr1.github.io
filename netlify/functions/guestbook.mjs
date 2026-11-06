@@ -1,16 +1,16 @@
-// Netlify 서버리스 함수 (선택 사용)
+// Netlify 서버리스 함수 — 방명록 쓰기(저장) 전용
 //
-// 이 함수는 "서버 쪽에서만" Supabase에 접근해야 할 때 사용하는 자리입니다.
-// 예: 민감한 service_role 키를 브라우저에 노출하지 않고 쓰기를 처리하고 싶을 때.
+// 설계(선택지 B, 과제 지침 기준):
+// - 브라우저(anon)는 테이블에 직접 쓰지 못한다(RLS에 anon insert 정책 없음).
+// - 쓰기는 반드시 이 서버 함수를 거친다. 함수가 입력을 검사한 뒤 service_role 키로 insert.
+// - service_role 키는 RLS를 우회하므로, 입력 검증 책임은 전적으로 이 함수에 있다.
 //
 // 중요:
-// - 이 파일은 publish/ 폴더 바깥(netlify/functions)에 있어 웹에 공개되지 않습니다.
-// - 환경변수는 Netlify 대시보드(Site settings > Environment variables)에 넣습니다.
-//   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (service_role 키는 절대 클라이언트/저장소에 커밋하지 마세요)
-// - MVP 기본 설계는 브라우저에서 anon 키로 직접 호출하는 방식입니다.
-//   이 함수는 보안을 더 강화하고 싶을 때 선택적으로 켜는 확장 경로입니다.
+// - 이 파일은 publish/ 폴더 바깥(netlify/functions)에 있어 웹에 공개되지 않는다.
+// - 환경변수는 Netlify 대시보드(Site configuration > Environment variables)에 넣는다.
+//   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (service_role 키는 절대 클라이언트/저장소에 넣지 말 것)
 //
-// 배포 후 호출 경로: /.netlify/functions/guestbook
+// 배포 후 호출 경로: /.netlify/functions/guestbook (POST)
 
 export default async (request) => {
   if (request.method !== "POST") {
@@ -40,9 +40,11 @@ export default async (request) => {
     });
   }
 
+  // 허용된 필드만 추출(그 외 필드는 무시). 서버가 입력을 검사한다.
   const nickname = (body.nickname ?? "").toString().trim();
   const message = (body.message ?? "").toString().trim();
-  const player = body.player ? body.player.toString().trim() : null;
+  const playerRaw = body.player ? body.player.toString().trim() : "";
+  const player = playerRaw.length ? playerRaw : null;
 
   // 서버 측 입력 검증
   if (nickname.length < 1 || nickname.length > 20) {
@@ -53,6 +55,12 @@ export default async (request) => {
   }
   if (message.length < 1 || message.length > 200) {
     return new Response(JSON.stringify({ error: "메시지는 1~200자여야 합니다." }), {
+      status: 400,
+      headers: { "content-type": "application/json" },
+    });
+  }
+  if (player !== null && player.length > 20) {
+    return new Response(JSON.stringify({ error: "선수 이름은 20자 이하여야 합니다." }), {
       status: 400,
       headers: { "content-type": "application/json" },
     });

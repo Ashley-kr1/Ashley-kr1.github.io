@@ -133,6 +133,24 @@ tbody tr:hover{background:#fff6f7}
 .win{color:var(--red);font-weight:700}.loss{color:#888;font-weight:700}
 
 @media(max-width:480px){dl{grid-template-columns:1fr}dt{margin-top:8px}}
+/* 방명록 */
+#guestbook .gb-form{margin:12px 0 18px;display:flex;flex-direction:column;gap:10px}
+#guestbook .gb-row{display:flex;gap:10px;flex-wrap:wrap}
+#guestbook .gb-row input{flex:1;min-width:140px}
+#guestbook input,#guestbook textarea{padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+#guestbook textarea{resize:vertical}
+#guestbook .gb-actions{display:flex;align-items:center;gap:12px}
+#guestbook button{background:var(--red);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:1rem;font-weight:700;cursor:pointer}
+#guestbook button:disabled{opacity:.6;cursor:default}
+#guestbook .gb-status{font-size:.9rem;color:#555}
+#guestbook .gb-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+#guestbook .gb-list li{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:#fff}
+#guestbook .gb-item .gb-head{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+#guestbook .gb-item .gb-nick{font-weight:700;color:var(--ink)}
+#guestbook .gb-item .gb-player{color:var(--red);font-weight:700;font-size:.9rem}
+#guestbook .gb-item .gb-time{color:#999;font-size:.8rem}
+#guestbook .gb-item .gb-msg{margin:6px 0 0;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+#guestbook .gb-empty{color:#999;text-align:center}
 </style>
 </head>
 <body>
@@ -262,6 +280,25 @@ tbody tr:hover{background:#fff6f7}
   </ul>
 </div></section>
 
+<section id="guestbook"><div class="wrap">
+  <h2>선수 응원 방명록</h2>
+  <p>좋아하는 선수에게 짧은 응원 한마디를 남겨 보세요. 남긴 글은 모두에게 보입니다.</p>
+
+  <form id="gb-form" class="gb-form" autocomplete="off">
+    <div class="gb-row">
+      <input id="gb-nickname" type="text" maxlength="20" placeholder="닉네임 (1~20자)" required aria-label="닉네임">
+      <input id="gb-player" type="text" maxlength="20" placeholder="응원할 선수 (선택)" aria-label="응원할 선수 이름">
+    </div>
+    <textarea id="gb-message" maxlength="200" rows="3" placeholder="응원 메시지 (1~200자)" required aria-label="응원 메시지"></textarea>
+    <div class="gb-actions">
+      <button id="gb-submit" type="submit">응원 남기기</button>
+      <span id="gb-status" class="gb-status" role="status" aria-live="polite"></span>
+    </div>
+  </form>
+
+  <ul id="gb-list" class="gb-list" aria-live="polite"><li class="gb-empty">응원을 불러오는 중…</li></ul>
+</div></section>
+
 <footer>Ashley-kr1 · SSG 랜더스 팬페이지 · Sprint 1</footer>
 
 <script>
@@ -350,6 +387,98 @@ tbody tr:hover{background:#fff6f7}
     resultBox.classList.add('hidden');
     resetBtn.classList.add('hidden');
   });
+})();
+</script>
+
+<!-- ===== 방명록 (Supabase: 읽기=anon 직접, 쓰기=Netlify 서버 함수 경유) ===== -->
+<script>
+(function(){
+  // ▼▼▼ 본인 Supabase 값으로 교체하세요 (anon 키는 공개 가능한 키라 프런트에 넣어도 됨) ▼▼▼
+  var SUPABASE_URL = "SUPABASE_URL_PLACEHOLDER";        // 예: https://xxxx.supabase.co
+  var SUPABASE_ANON_KEY = "SUPABASE_ANON_KEY_PLACEHOLDER"; // Supabase Settings > API 의 anon public 키
+  // ▲▲▲ 여기까지 ▲▲▲
+
+  var listEl = document.getElementById('gb-list');
+  var formEl = document.getElementById('gb-form');
+  var statusEl = document.getElementById('gb-status');
+  var btnEl = document.getElementById('gb-submit');
+  var nickEl = document.getElementById('gb-nickname');
+  var msgEl = document.getElementById('gb-message');
+  var playerEl = document.getElementById('gb-player');
+
+  var configured = SUPABASE_URL.indexOf('http') === 0 && SUPABASE_ANON_KEY.indexOf('PLACEHOLDER') === -1;
+
+  function setStatus(text){ statusEl.textContent = text || ''; }
+
+  function fmtTime(iso){
+    try { var d = new Date(iso); return d.toLocaleString('ko-KR', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}); }
+    catch(e){ return ''; }
+  }
+
+  // 목록 렌더 (사용자 입력은 textContent로만 넣어 XSS 방지)
+  function render(rows){
+    listEl.innerHTML = '';
+    if(!rows || rows.length === 0){
+      var li = document.createElement('li'); li.className='gb-empty';
+      li.textContent = '아직 응원이 없습니다. 첫 응원을 남겨 보세요!';
+      listEl.appendChild(li); return;
+    }
+    rows.forEach(function(r){
+      var li = document.createElement('li'); li.className='gb-item';
+      var head = document.createElement('div'); head.className='gb-head';
+      var left = document.createElement('span'); left.className='gb-nick'; left.textContent = r.nickname;
+      head.appendChild(left);
+      if(r.player){ var p = document.createElement('span'); p.className='gb-player'; p.textContent = '→ ' + r.player; head.appendChild(p); }
+      var t = document.createElement('span'); t.className='gb-time'; t.textContent = fmtTime(r.created_at);
+      head.appendChild(t);
+      var msg = document.createElement('p'); msg.className='gb-msg'; msg.textContent = r.message;
+      li.appendChild(head); li.appendChild(msg);
+      listEl.appendChild(li);
+    });
+  }
+
+  // 읽기: 브라우저가 anon 키로 Supabase에서 직접 select (최신순)
+  function load(){
+    if(!configured){
+      listEl.innerHTML = '<li class="gb-empty">방명록을 쓰려면 Supabase 설정(URL·anon 키)이 필요합니다.</li>';
+      return;
+    }
+    fetch(SUPABASE_URL + '/rest/v1/guestbook?select=nickname,message,player,created_at&order=created_at.desc&limit=50', {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + SUPABASE_ANON_KEY }
+    })
+    .then(function(res){ if(!res.ok) throw new Error('load failed'); return res.json(); })
+    .then(render)
+    .catch(function(err){ console.error(err); listEl.innerHTML = '<li class="gb-empty">응원 목록을 불러오지 못했습니다.</li>'; });
+  }
+
+  // 쓰기: 브라우저 → Netlify 서버 함수(POST) → 서버가 검증 후 service_role로 저장
+  formEl.addEventListener('submit', function(e){
+    e.preventDefault();
+    var nickname = nickEl.value.trim();
+    var message = msgEl.value.trim();
+    var player = playerEl.value.trim();
+
+    if(nickname.length < 1 || nickname.length > 20){ setStatus('닉네임은 1~20자로 입력하세요.'); return; }
+    if(message.length < 1 || message.length > 200){ setStatus('메시지는 1~200자로 입력하세요.'); return; }
+
+    btnEl.disabled = true; setStatus('등록 중…');
+    fetch('/.netlify/functions/guestbook', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ nickname: nickname, message: message, player: player })
+    })
+    .then(function(res){ return res.json().then(function(j){ return { ok: res.ok, body: j }; }); })
+    .then(function(r){
+      if(!r.ok){ setStatus((r.body && r.body.error) || '등록에 실패했습니다. 잠시 후 다시 시도해 주세요.'); return; }
+      setStatus('응원이 등록되었습니다 ⚾');
+      nickEl.value = ''; msgEl.value = ''; playerEl.value = '';
+      load();
+    })
+    .catch(function(err){ console.error(err); setStatus('등록에 실패했습니다. 잠시 후 다시 시도해 주세요.'); })
+    .finally(function(){ btnEl.disabled = false; });
+  });
+
+  load();
 })();
 </script>
 </body>
