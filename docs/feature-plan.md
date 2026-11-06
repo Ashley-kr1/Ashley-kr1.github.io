@@ -223,3 +223,17 @@ create policy "anyone can insert guestbook"
 - Supabase 프로젝트 URL·anon 키는 실제 구현 단계에서 발급받아 적용한다(현재 미보유 가정).
 - 선수별 필터·정렬은 MVP 이후 확장 항목으로 남긴다.
 - 이 문서는 계획이며, 구현과 배포(push)는 사용자의 추가 지시가 있을 때 진행한다.
+
+---
+
+## 10. 배포 기록 (2026-11-02)
+
+- 배포 서비스: Netlify
+- Netlify 사이트(프로젝트) 이름: `ashley-kr1`
+- 공개 배포 주소: https://ashley-kr1.netlify.app
+- 연결 저장소: github.com/Ashley-kr1/Ashley-kr1.github.io (브랜치 `main`)
+- 빌드 설정: Build command `bash ./build.sh`, Publish directory `publish`, Functions directory `netlify/functions`
+- 첫 배포 결과: `pwsh` 빌드 명령으로 1차 실패(exit code 2) → `netlify.toml`을 `bash ./build.sh`로 수정·push 후 재배포 성공.
+- 사이트 공개 설정: 처음 Private(외부 401)였고 "Make public"으로 공개 전환. 공개 주소에서 홈페이지 정상 확인(구단 소개·우승 기록·선수 목록·추천·경기 표 노출).
+- 참고: 기존 GitHub Pages 주소(https://ashley-kr1.github.io/)와 별개로 Netlify 주소가 공존. 서버 함수(방명록 등)는 앞으로 Netlify 주소에서 테스트한다. GitHub Pages에는 서버 함수가 자동 생성되지 않는다.
+- 미해결(배포와 별개): 선수 사진 파일명 불일치로 일부 선수는 플레이스홀더로 표시됨.
