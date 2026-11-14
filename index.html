@@ -138,6 +138,19 @@ footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
 .rec .reset{margin-top:14px;background:none;border:none;color:var(--red);font-weight:700;cursor:pointer;text-decoration:underline;padding:0}
 .links{margin:0;padding-left:1.2em}.links a{color:var(--red);font-weight:700}
 .note{margin-top:20px;color:#777;font-size:.85rem}
+/* 홈구장 지도 */
+.map-wrap{margin-top:18px;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.map-wrap iframe{display:block;width:100%;height:clamp(320px,52vw,460px);border:0}
+.map-links{margin:12px 0 0;padding-left:1.2em}
+.map-links a{color:var(--red);font-weight:700}
+/* 오시는 길 */
+.access{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.access li{background:#fff;border:1px solid var(--line);border-left:5px solid var(--red);border-radius:8px;padding:16px 18px}
+.access .ico{font-size:1.5rem;line-height:1}
+.access h3{margin:6px 0 6px;font-size:1.05rem;color:var(--red)}
+.access p{margin:0;font-size:.92rem;color:#444;line-height:1.6}
+.access .addr{margin:18px 0 0;background:#fffdf3;border:1px solid var(--gold);border-radius:8px;padding:12px 16px;font-size:.95rem}
+.access .addr strong{color:var(--red)}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.95rem}
 th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -180,11 +193,6 @@ tbody tr:hover{background:#fff6f7}
   </div>
 </header>
 <nav><div class="wrap"><a href="#intro">구단 소개</a><a href="#history">우승 기록</a><a href="#home">홈구장</a><a href="#players">선수 목록</a><a href="#recommender">선수 추천</a><a href="#schedule">경기 일정</a><a href="#highlight">하이라이트</a><a href="#official">공식 페이지</a></div></nav>
-
-<div style="max-width:960px;margin:16px auto;padding:12px 16px;background:#fff3e0;border:1px solid #ffb74d;border-radius:8px;text-align:center;font-size:15px;">
-  ⚾ 응원 방명록을 준비 중인 <strong>새 실습 사이트</strong>가 있습니다 →
-  <a href="https://ashley-kr1.netlify.app" target="_blank" rel="noopener" style="color:#e65100;font-weight:bold;">실습 사이트로 가기 (Netlify)</a>
-</div>
 
 <section id="intro"><div class="wrap">
   <h2>구단 소개</h2>
@@ -281,6 +289,45 @@ tbody tr:hover{background:#fff6f7}
 <section id="home"><div class="wrap">
   <h2>홈구장</h2>
   <p>인천 SSG 랜더스필드(문학)에서 홈경기를 치릅니다. 청라돔은 2028년 개막 예정입니다.</p>
+  <div class="map-wrap">
+    <iframe
+      title="인천 SSG 랜더스필드 위치 지도"
+      src="https://www.google.com/maps?q=%EC%9D%B8%EC%B2%9C+SSG+%EB%9E%9C%EB%8D%94%EC%8A%A4%ED%95%84%EB%93%9C&hl=ko&z=16&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen></iframe>
+  </div>
+  <ul class="map-links">
+    <li><a href="https://www.google.com/maps/search/?api=1&query=%EC%9D%B8%EC%B2%9C+SSG+%EB%9E%9C%EB%8D%94%EC%8A%A4%ED%95%84%EB%93%9C" target="_blank" rel="noopener">구글 지도에서 크게 보기 · 길찾기</a></li>
+  </ul>
+
+  <h3 style="margin:28px 0 0;font-size:1.25rem">오시는 길</h3>
+  <ul class="access">
+    <li>
+      <div class="ico" aria-hidden="true">🚇</div>
+      <h3>지하철</h3>
+      <p>인천도시철도 1호선 <strong>문학경기장역</strong> 하차. 경기장과 바로 연결되어 도보로 이동할 수 있습니다.</p>
+    </li>
+    <li>
+      <div class="ico" aria-hidden="true">🚌</div>
+      <h3>버스</h3>
+      <p>문학경기장 정류장을 경유하는 시내버스를 이용할 수 있습니다. 노선·시간은 경기일에 따라 달라질 수 있으니 아래 교통앱에서 실시간으로 확인하세요.</p>
+    </li>
+    <li>
+      <div class="ico" aria-hidden="true">🅿️</div>
+      <h3>주차장</h3>
+      <p>경기장 내 주차장을 이용할 수 있습니다. 경기일에는 혼잡하고 자리가 조기에 마감될 수 있어 대중교통 이용을 권장합니다. 요금·운영은 공식 안내를 확인하세요.</p>
+    </li>
+  </ul>
+
+  <div class="addr">
+    📍 <strong>주소</strong> · 인천광역시 미추홀구 매소홀로 618 (문학동 482) — 인천 SSG 랜더스필드
+  </div>
+
+  <ul class="map-links">
+    <li><a href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20SSG%20%EB%9E%9C%EB%8D%94%EC%8A%A4%ED%95%84%EB%93%9C" target="_blank" rel="noopener">네이버 지도에서 길찾기 · 대중교통 안내</a></li>
+    <li><a href="https://www.ssglanders.com" target="_blank" rel="noopener">SSG 랜더스 공식 홈페이지에서 주차·교통 안내 확인</a></li>
+  </ul>
 </div></section>
 
 <section id="players"><div class="wrap">
