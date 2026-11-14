@@ -138,45 +138,6 @@ footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
 .rec .reset{margin-top:14px;background:none;border:none;color:var(--red);font-weight:700;cursor:pointer;text-decoration:underline;padding:0}
 .links{margin:0;padding-left:1.2em}.links a{color:var(--red);font-weight:700}
 .note{margin-top:20px;color:#777;font-size:.85rem}
-/* 홈구장 지도 */
-.map-wrap{margin-top:18px;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.08)}
-.map-wrap iframe{display:block;width:100%;height:clamp(320px,52vw,460px);border:0}
-.map-links{margin:12px 0 0;padding-left:1.2em}
-.map-links a{color:var(--red);font-weight:700}
-/* 오시는 길 */
-.access{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.access li{background:#fff;border:1px solid var(--line);border-left:5px solid var(--red);border-radius:8px;padding:16px 18px}
-.access .ico{font-size:1.5rem;line-height:1}
-.access h3{margin:6px 0 6px;font-size:1.05rem;color:var(--red)}
-.access p{margin:0;font-size:.92rem;color:#444;line-height:1.6}
-.access .addr{margin:18px 0 0;background:#fffdf3;border:1px solid var(--gold);border-radius:8px;padding:12px 16px;font-size:.95rem}
-.access .addr strong{color:var(--red)}
-/* 타이밍 타격 미니게임 */
-.game{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px}
-.game .scoreboard{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 18px}
-.game .stat{flex:1 1 80px;min-width:80px;text-align:center;background:var(--ink);color:#fff;border-radius:8px;padding:12px 10px}
-.game .stat .num{display:block;font-size:1.8rem;font-weight:900;color:var(--gold);line-height:1}
-.game .stat .lbl{display:block;margin-top:4px;font-size:.8rem;opacity:.85}
-.game .outs{display:inline-flex;gap:6px;vertical-align:middle;margin-left:4px}
-.game .outs .dot{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--gold);box-sizing:border-box}
-.game .outs .dot.on{background:var(--gold)}
-/* 타이밍 바 */
-.game .bar{position:relative;height:40px;background:#f0ece3;border:2px solid var(--line);border-radius:999px;overflow:hidden;margin:4px 0 18px}
-.game .bar .zone{position:absolute;top:0;bottom:0;background:rgba(242,183,5,.35);border-left:2px dashed var(--gold);border-right:2px dashed var(--gold)}
-.game .bar .sweet{position:absolute;top:0;bottom:0;background:var(--gold);opacity:.75}
-.game .bar .cursor{position:absolute;top:-3px;bottom:-3px;width:5px;background:var(--red);border-radius:3px;box-shadow:0 0 0 2px #fff}
-.game .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.game button.play{font:inherit;cursor:pointer;border:none;background:var(--red);color:#fff;font-weight:900;font-size:1.05rem;padding:12px 26px;border-radius:999px;transition:transform .1s,background .15s}
-.game button.play:hover:not(:disabled){background:#a00a23}
-.game button.play:active:not(:disabled){transform:scale(.96)}
-.game button.play:disabled{background:#cbbfae;cursor:not-allowed}
-.game button.again{font:inherit;cursor:pointer;border:2px solid var(--red);background:#fff;color:var(--red);font-weight:800;padding:10px 20px;border-radius:999px}
-.game .hidden{display:none}
-.game .msg{margin:16px 0 0;font-weight:800;font-size:1.15rem;min-height:1.6em}
-.game .msg.homerun{color:var(--red)}
-.game .msg.hit{color:#c98a00}
-.game .msg.miss{color:#888}
-.game .hint{margin:10px 0 0;color:#777;font-size:.85rem}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.95rem}
 th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -185,6 +146,27 @@ tbody tr:hover{background:#fff6f7}
 .win{color:var(--red);font-weight:700}.loss{color:#888;font-weight:700}
 
 @media(max-width:480px){dl{grid-template-columns:1fr}dt{margin-top:8px}}
+/* 방명록 */
+#guestbook .gb-form{margin:12px 0 18px;display:flex;flex-direction:column;gap:10px}
+#guestbook .gb-row{display:flex;gap:10px;flex-wrap:wrap}
+#guestbook .gb-row input{flex:1;min-width:140px}
+#guestbook input,#guestbook textarea,#guestbook select{padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+#guestbook select{flex:1;min-width:140px;background:#fff;color:var(--ink);cursor:pointer}
+#guestbook .gb-other-row.hidden{display:none}
+#guestbook .gb-other-row input{flex:1;min-width:140px}
+#guestbook textarea{resize:vertical}
+#guestbook .gb-actions{display:flex;align-items:center;gap:12px}
+#guestbook button{background:var(--red);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:1rem;font-weight:700;cursor:pointer}
+#guestbook button:disabled{opacity:.6;cursor:default}
+#guestbook .gb-status{font-size:.9rem;color:#555}
+#guestbook .gb-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+#guestbook .gb-list li{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:#fff}
+#guestbook .gb-item .gb-head{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+#guestbook .gb-item .gb-nick{font-weight:700;color:var(--ink)}
+#guestbook .gb-item .gb-player{color:var(--red);font-weight:700;font-size:.9rem}
+#guestbook .gb-item .gb-time{color:#999;font-size:.8rem}
+#guestbook .gb-item .gb-msg{margin:6px 0 0;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+#guestbook .gb-empty{color:#999;text-align:center}
 </style>
 </head>
 <body>
@@ -197,7 +179,7 @@ tbody tr:hover{background:#fff6f7}
     <img class="logo" src="emblem_01.png" alt="SSG 랜더스 로고" loading="eager">
   </div>
 </header>
-<nav><div class="wrap"><a href="#intro">구단 소개</a><a href="#history">우승 기록</a><a href="#home">홈구장</a><a href="#players">선수 목록</a><a href="#recommender">선수 추천</a><a href="#game">미니게임</a><a href="#schedule">경기 일정</a><a href="#highlight">하이라이트</a><a href="#official">공식 페이지</a></div></nav>
+<nav><div class="wrap"><a href="#intro">구단 소개</a><a href="#history">우승 기록</a><a href="#home">홈구장</a><a href="#players">선수 목록</a><a href="#recommender">선수 추천</a><a href="#schedule">경기 일정</a><a href="#highlight">하이라이트</a><a href="#official">공식 페이지</a></div></nav>
 
 <div style="max-width:960px;margin:16px auto;padding:12px 16px;background:#fff3e0;border:1px solid #ffb74d;border-radius:8px;text-align:center;font-size:15px;">
   ⚾ 응원 방명록을 준비 중인 <strong>새 실습 사이트</strong>가 있습니다 →
@@ -299,45 +281,6 @@ tbody tr:hover{background:#fff6f7}
 <section id="home"><div class="wrap">
   <h2>홈구장</h2>
   <p>인천 SSG 랜더스필드(문학)에서 홈경기를 치릅니다. 청라돔은 2028년 개막 예정입니다.</p>
-  <div class="map-wrap">
-    <iframe
-      title="인천 SSG 랜더스필드 위치 지도"
-      src="https://www.google.com/maps?q=%EC%9D%B8%EC%B2%9C+SSG+%EB%9E%9C%EB%8D%94%EC%8A%A4%ED%95%84%EB%93%9C&hl=ko&z=16&output=embed"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      allowfullscreen></iframe>
-  </div>
-  <ul class="map-links">
-    <li><a href="https://www.google.com/maps/search/?api=1&query=%EC%9D%B8%EC%B2%9C+SSG+%EB%9E%9C%EB%8D%94%EC%8A%A4%ED%95%84%EB%93%9C" target="_blank" rel="noopener">구글 지도에서 크게 보기 · 길찾기</a></li>
-  </ul>
-
-  <h3 style="margin:28px 0 0;font-size:1.25rem">오시는 길</h3>
-  <ul class="access">
-    <li>
-      <div class="ico" aria-hidden="true">🚇</div>
-      <h3>지하철</h3>
-      <p>인천도시철도 1호선 <strong>문학경기장역</strong> 하차. 경기장과 바로 연결되어 도보로 이동할 수 있습니다.</p>
-    </li>
-    <li>
-      <div class="ico" aria-hidden="true">🚌</div>
-      <h3>버스</h3>
-      <p>문학경기장 정류장을 경유하는 시내버스를 이용할 수 있습니다. 노선·시간은 경기일에 따라 달라질 수 있으니 아래 교통앱에서 실시간으로 확인하세요.</p>
-    </li>
-    <li>
-      <div class="ico" aria-hidden="true">🅿️</div>
-      <h3>주차장</h3>
-      <p>경기장 내 주차장을 이용할 수 있습니다. 경기일에는 혼잡하고 자리가 조기에 마감될 수 있어 대중교통 이용을 권장합니다. 요금·운영은 공식 안내를 확인하세요.</p>
-    </li>
-  </ul>
-
-  <div class="addr">
-    📍 <strong>주소</strong> · 인천광역시 미추홀구 매소홀로 618 (문학동 482) — 인천 SSG 랜더스필드
-  </div>
-
-  <ul class="map-links">
-    <li><a href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20SSG%20%EB%9E%9C%EB%8D%94%EC%8A%A4%ED%95%84%EB%93%9C" target="_blank" rel="noopener">네이버 지도에서 길찾기 · 대중교통 안내</a></li>
-    <li><a href="https://www.ssglanders.com" target="_blank" rel="noopener">SSG 랜더스 공식 홈페이지에서 주차·교통 안내 확인</a></li>
-  </ul>
 </div></section>
 
 <section id="players"><div class="wrap">
@@ -360,6 +303,7 @@ tbody tr:hover{background:#fff6f7}
     <li class="card retired"><img src="choo-shinsoo.jpg" alt="추신수 선수 사진" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; aria-hidden=&quot;true&quot;&gt;추신수&lt;/div&gt;'"><h3>추신수<span class="retired-badge">은퇴</span></h3><p class="pos">외야수</p><p class="desc">메이저리그를 거쳐 SSG에서 활약한 교타자. 뛰어난 출루 능력과 선구안을 갖춘 리드오프형 외야수였습니다.</p></li>
   </ul>
 
+  <p class="note">현역 선수(레드)와 은퇴 선수(세피아)를 색으로 구분했습니다. 선수단과 등번호는 시즌 중 바뀔 수 있으며, 선수 사진 파일을 추가하면 플레이스홀더 대신 사진이 표시됩니다.</p>
 </div></section>
 
 <section id="recommender"><div class="wrap">
@@ -382,30 +326,6 @@ tbody tr:hover{background:#fff6f7}
   </div>
 </div></section>
 
-<section id="game"><div class="wrap">
-  <h2>타이밍 타격 미니게임</h2>
-  <p>SSG 타자가 되어 홈런을 노려보세요. <strong>투구</strong>를 누르면 빨간 커서가 좌우로 움직입니다. 노란 존 안에서 <strong>스윙</strong>을 누르면 안타, 한가운데 맞히면 <strong>홈런</strong>입니다. 3아웃이면 경기 종료!</p>
-  <div class="game">
-    <div class="scoreboard">
-      <div class="stat"><span class="num" id="g-hr">0</span><span class="lbl">홈런</span></div>
-      <div class="stat"><span class="num" id="g-hit">0</span><span class="lbl">안타</span></div>
-      <div class="stat"><span class="num" id="g-score">0</span><span class="lbl">점수</span></div>
-      <div class="stat"><span class="lbl" style="margin:0">아웃</span><span class="outs" id="g-outs" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div>
-    </div>
-    <div class="bar" id="g-bar" aria-hidden="true">
-      <div class="zone" id="g-zone"></div>
-      <div class="sweet" id="g-sweet"></div>
-      <div class="cursor" id="g-cursor"></div>
-    </div>
-    <div class="controls">
-      <button class="play" type="button" id="g-btn">투구</button>
-      <button class="again hidden" type="button" id="g-reset">다시 하기</button>
-    </div>
-    <p class="msg" id="g-msg" role="status" aria-live="polite"></p>
-    <p class="hint">버튼을 클릭하거나, 버튼에 포커스를 둔 뒤 스페이스·엔터 키로도 플레이할 수 있습니다.</p>
-  </div>
-</div></section>
-
 <section id="schedule"><div class="wrap">
   <h2>최근 경기 결과</h2>
   <p>인천 SSG 랜더스필드에서 열린 최근 홈경기 결과입니다.</p>
@@ -419,6 +339,7 @@ tbody tr:hover{background:#fff6f7}
       </tbody>
     </table>
   </div>
+  <p class="note">※ 위 일정은 예시 데이터입니다. 실제 경기 결과는 공식 페이지에서 확인하세요. 경기 결과를 주기적으로 업데이트하면 검색 노출에 도움이 됩니다.</p>
 </div></section>
 
 <section id="highlight"><div class="wrap">
@@ -437,6 +358,47 @@ tbody tr:hover{background:#fff6f7}
     <li><a href="https://www.youtube.com/results?search_query=SSG%20%EB%9E%9C%EB%8D%94%EC%8A%A4&sp=EgIQAg%253D%253D" target="_blank" rel="noopener">SSG 랜더스 유튜브 채널</a></li>
     <li><a href="https://www.google.com/search?q=SSG%20%EB%9E%9C%EB%8D%94%EC%8A%A4%20%EA%B3%B5%EC%8B%9D%20%EC%9D%B8%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8" target="_blank" rel="noopener">SSG 랜더스 인스타그램 프로필</a></li>
   </ul>
+</div></section>
+
+<section id="guestbook"><div class="wrap">
+  <h2>선수 응원 방명록</h2>
+  <p>좋아하는 선수에게 짧은 응원 한마디를 남겨 보세요. 남긴 글은 모두에게 보입니다.</p>
+
+  <form id="gb-form" class="gb-form" autocomplete="off">
+    <div class="gb-row">
+      <input id="gb-nickname" type="text" maxlength="20" placeholder="닉네임 (1~20자)" required aria-label="닉네임">
+      <select id="gb-player" required aria-label="응원할 선수">
+        <option value="" disabled selected>응원할 선수 선택</option>
+        <optgroup label="현역 선수">
+          <option value="최정">최정 (3루수)</option>
+          <option value="김광현">김광현 (투수)</option>
+          <option value="한유섬">한유섬 (외야수)</option>
+          <option value="최지훈">최지훈 (외야수)</option>
+          <option value="박성한">박성한 (유격수)</option>
+          <option value="조병현">조병현 (투수)</option>
+        </optgroup>
+        <optgroup label="레전드 (은퇴)">
+          <option value="박경완">박경완 (포수)</option>
+          <option value="김강민">김강민 (외야수)</option>
+          <option value="추신수">추신수 (외야수)</option>
+        </optgroup>
+        <optgroup label="팀 전체">
+          <option value="SSG 랜더스">SSG 랜더스 (팀 전체)</option>
+        </optgroup>
+        <option value="__other__">기타 (직접 입력)</option>
+      </select>
+    </div>
+    <div class="gb-row gb-other-row hidden" id="gb-other-row">
+      <input id="gb-other" type="text" maxlength="20" placeholder="선수 이름 직접 입력 (최대 20자)" aria-label="기타 선수 이름 직접 입력">
+    </div>
+    <textarea id="gb-message" maxlength="200" rows="3" placeholder="응원 메시지 (1~200자)" required aria-label="응원 메시지"></textarea>
+    <div class="gb-actions">
+      <button id="gb-submit" type="submit">응원 남기기</button>
+      <span id="gb-status" class="gb-status" role="status" aria-live="polite"></span>
+    </div>
+  </form>
+
+  <ul id="gb-list" class="gb-list" aria-live="polite"><li class="gb-empty">응원을 불러오는 중…</li></ul>
 </div></section>
 
 <footer>Ashley-kr1 · SSG 랜더스 팬페이지 · Sprint 1</footer>
@@ -528,144 +490,162 @@ tbody tr:hover{background:#fff6f7}
     resetBtn.classList.add('hidden');
   });
 })();
+</script>
 
-// ===== 타이밍 타격 미니게임 =====
+<!-- ===== 방명록 (Supabase: 읽기=anon 직접, 쓰기=Netlify 서버 함수 경유) ===== -->
+<script>
 (function(){
-  var bar    = document.getElementById('g-bar');
-  var cursor = document.getElementById('g-cursor');
-  var zoneEl = document.getElementById('g-zone');
-  var sweetEl= document.getElementById('g-sweet');
-  var btn    = document.getElementById('g-btn');
-  var resetB = document.getElementById('g-reset');
-  var msg    = document.getElementById('g-msg');
-  var hrEl   = document.getElementById('g-hr');
-  var hitEl  = document.getElementById('g-hit');
-  var scoreEl= document.getElementById('g-score');
-  var outsEl = document.getElementById('g-outs');
-  if(!bar) return;
+  // ▼▼▼ 본인 Supabase 값으로 교체하세요 (anon 키는 공개 가능한 키라 프런트에 넣어도 됨) ▼▼▼
+  var SUPABASE_URL = "https://rtztmwubihryuytbsrty.supabase.co";
+  var SUPABASE_ANON_KEY = "sb_publishable_sTbQ7c4dtkKu9UHnQXmoAA_HsfKyCTj";
+  // ▲▲▲ 여기까지 ▲▲▲
 
-  // 존 설정 (바 전체 폭 대비 %)
-  var ZONE_START = 35, ZONE_END = 65;   // 안타 존
-  var SWEET_START = 46, SWEET_END = 54; // 홈런(스윗스팟)
-  zoneEl.style.left  = ZONE_START + '%';
-  zoneEl.style.width = (ZONE_END - ZONE_START) + '%';
-  sweetEl.style.left = SWEET_START + '%';
-  sweetEl.style.width= (SWEET_END - SWEET_START) + '%';
+  var listEl = document.getElementById('gb-list');
+  var formEl = document.getElementById('gb-form');
+  var statusEl = document.getElementById('gb-status');
+  var btnEl = document.getElementById('gb-submit');
+  var nickEl = document.getElementById('gb-nickname');
+  var msgEl = document.getElementById('gb-message');
+  var playerEl = document.getElementById('gb-player');
+  var otherRow = document.getElementById('gb-other-row');
+  var otherEl = document.getElementById('gb-other');
 
-  var hr=0, hit=0, score=0, outs=0;
-  var raf=null, pos=0, dir=1, speed=1.1, swinging=false, gameOver=false;
+  // 유효한 선수 선택지(드롭다운 value) 화이트리스트 — 타팀 선수 방지
+  var VALID_PLAYERS = {};
+  Array.prototype.forEach.call(playerEl.options, function(o){
+    if(o.value && o.value !== '__other__') VALID_PLAYERS[o.value] = true;
+  });
 
-  function renderOuts(){
-    var dots = outsEl.querySelectorAll('.dot');
-    dots.forEach(function(d,i){ d.classList.toggle('on', i < outs); });
-  }
-  function setMsg(text, cls){
-    msg.className = 'msg' + (cls ? ' ' + cls : '');
-    msg.textContent = text;
-  }
-  function stopLoop(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
-
-  function loop(){
-    pos += dir * speed;
-    if(pos >= 100){ pos = 100; dir = -1; }
-    else if(pos <= 0){ pos = 0; dir = 1; }
-    cursor.style.left = 'calc(' + pos + '% - 2px)';
-    raf = requestAnimationFrame(loop);
-  }
-
-  function startPitch(){
-    if(gameOver || swinging) return;
-    swinging = true;
-    // 매 투구마다 속도 조금씩 증가
-    speed = 1.1 + Math.min(score, 10) * 0.08;
-    pos = 0; dir = 1;
-    btn.textContent = '스윙!';
-    setMsg('공을 노려보세요...', '');
-    stopLoop();
-    loop();
-  }
-
-  function swing(){
-    stopLoop();
-    swinging = false;
-    btn.textContent = '투구';
-    if(pos >= SWEET_START && pos <= SWEET_END){
-      hr++; score += 3;
-      setMsg('🏟️ 홈런! 담장을 넘겼습니다! (+3)', 'homerun');
-    } else if(pos >= ZONE_START && pos <= ZONE_END){
-      hit++; score += 1;
-      setMsg('⚾ 안타! 좋은 타격입니다. (+1)', 'hit');
+  // '기타' 선택 시에만 직접 입력란 표시
+  playerEl.addEventListener('change', function(){
+    if(playerEl.value === '__other__'){
+      otherRow.classList.remove('hidden');
+      otherEl.focus();
     } else {
-      outs++; renderOuts();
-      if(outs >= 3){ endGame(); return; }
-      setMsg('헛스윙! 아웃 (' + outs + '/3)', 'miss');
+      otherRow.classList.add('hidden');
+      otherEl.value = '';
     }
-    updateStats();
-  }
-
-  function updateStats(){
-    hrEl.textContent = hr;
-    hitEl.textContent = hit;
-    scoreEl.textContent = score;
-  }
-
-  function endGame(){
-    gameOver = true;
-    updateStats();
-    btn.disabled = true;
-    btn.textContent = '경기 종료';
-    resetB.classList.remove('hidden');
-    setMsg('경기 종료! 홈런 ' + hr + '개, 안타 ' + hit + '개, 최종 ' + score + '점.', 'homerun');
-  }
-
-  // 버튼 하나로 투구/스윙 토글
-  btn.addEventListener('click', function(){
-    if(gameOver) return;
-    if(!swinging) startPitch();
-    else swing();
+    setStatus('');
   });
 
-  resetB.addEventListener('click', function(){
-    stopLoop();
-    hr=0; hit=0; score=0; outs=0; swinging=false; gameOver=false;
-    pos=0; dir=1;
-    cursor.style.left='calc(0% - 2px)';
-    renderOuts(); updateStats();
-    btn.disabled=false; btn.textContent='투구';
-    resetB.classList.add('hidden');
-    setMsg('', '');
+  var configured = SUPABASE_URL.indexOf('http') === 0 && SUPABASE_ANON_KEY.indexOf('PLACEHOLDER') === -1;
+
+  function setStatus(text){ statusEl.textContent = text || ''; }
+
+  function fmtTime(iso){
+    try { var d = new Date(iso); return d.toLocaleString('ko-KR', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}); }
+    catch(e){ return ''; }
+  }
+
+  // 목록 렌더 (사용자 입력은 textContent로만 넣어 XSS 방지)
+  function render(rows){
+    listEl.innerHTML = '';
+    if(!rows || rows.length === 0){
+      var li = document.createElement('li'); li.className='gb-empty';
+      li.textContent = '아직 응원이 없습니다. 첫 응원을 남겨 보세요!';
+      listEl.appendChild(li); return;
+    }
+    rows.forEach(function(r){
+      var li = document.createElement('li'); li.className='gb-item';
+      var head = document.createElement('div'); head.className='gb-head';
+      var left = document.createElement('span'); left.className='gb-nick'; left.textContent = r.nickname;
+      head.appendChild(left);
+      if(r.player){ var p = document.createElement('span'); p.className='gb-player'; p.textContent = '→ ' + r.player; head.appendChild(p); }
+      var t = document.createElement('span'); t.className='gb-time'; t.textContent = fmtTime(r.created_at);
+      head.appendChild(t);
+      var msg = document.createElement('p'); msg.className='gb-msg'; msg.textContent = r.message;
+      li.appendChild(head); li.appendChild(msg);
+      listEl.appendChild(li);
+    });
+  }
+
+  // 읽기: 브라우저가 anon 키로 Supabase에서 직접 select (최신순)
+  function load(){
+    if(!configured){
+      listEl.innerHTML = '<li class="gb-empty">방명록을 쓰려면 Supabase 설정(URL·anon 키)이 필요합니다.</li>';
+      return;
+    }
+    fetch(SUPABASE_URL + '/rest/v1/guestbook?select=nickname,message,player,created_at&order=created_at.desc&limit=50', {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + SUPABASE_ANON_KEY }
+    })
+    .then(function(res){ if(!res.ok) throw new Error('load failed'); return res.json(); })
+    .then(render)
+    .catch(function(err){ console.error(err); listEl.innerHTML = '<li class="gb-empty">응원 목록을 불러오지 못했습니다.</li>'; });
+  }
+
+  // 쓰기: 브라우저 → Netlify 서버 함수(POST) → 서버가 검증 후 service_role로 저장
+  formEl.addEventListener('submit', function(e){
+    e.preventDefault();
+    var nickname = nickEl.value.trim();
+    var message = msgEl.value.trim();
+    var choice = playerEl.value;
+    var player;
+
+    // 응원할 선수 결정 — 드롭다운 선택 또는 '기타' 직접 입력
+    if(!choice){ setStatus('응원할 선수를 선택하세요.'); return; }
+    if(choice === '__other__'){
+      player = otherEl.value.trim();
+      if(player.length < 1){ setStatus('기타를 선택했습니다. 선수 이름을 직접 입력하세요.'); return; }
+      if(player.length > 20){ setStatus('선수 이름은 20자 이내로 입력하세요.'); return; }
+    } else {
+      // 화이트리스트 검증 — 목록에 없는 값(타팀 선수 등) 차단
+      if(!VALID_PLAYERS[choice]){ setStatus('선택할 수 없는 선수입니다. 목록에서 다시 골라 주세요.'); return; }
+      player = choice;
+    }
+
+    if(nickname.length < 1 || nickname.length > 20){ setStatus('닉네임은 1~20자로 입력하세요.'); return; }
+    if(message.length < 1 || message.length > 200){ setStatus('메시지는 1~200자로 입력하세요.'); return; }
+
+    btnEl.disabled = true; setStatus('등록 중…');
+    fetch('/.netlify/functions/guestbook', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ nickname: nickname, message: message, player: player })
+    })
+    .then(function(res){ return res.json().then(function(j){ return { ok: res.ok, body: j }; }); })
+    .then(function(r){
+      if(!r.ok){ setStatus((r.body && r.body.error) || '등록에 실패했습니다. 잠시 후 다시 시도해 주세요.'); return; }
+      setStatus('응원이 등록되었습니다 ⚾');
+      nickEl.value = ''; msgEl.value = '';
+      playerEl.selectedIndex = 0; otherEl.value = ''; otherRow.classList.add('hidden');
+      load();
+    })
+    .catch(function(err){ console.error(err); setStatus('등록에 실패했습니다. 잠시 후 다시 시도해 주세요.'); })
+    .finally(function(){ btnEl.disabled = false; });
   });
 
-  renderOuts();
+  load();
+})();
+</script>
 
-  // ===== 한국시리즈 연도별 상세 아코디언 =====
-  (function(){
-    var box = document.getElementById('yearBtns');
-    if(!box) return;
-    var btns = Array.prototype.slice.call(box.querySelectorAll('.year-btn'));
-    function closeAll(except){
-      btns.forEach(function(b){
-        if(b === except) return;
-        var panel = document.getElementById(b.getAttribute('aria-controls'));
+<!-- ===== 한국시리즈 연도별 상세 아코디언 ===== -->
+<script>
+(function(){
+  var box = document.getElementById('yearBtns');
+  if(!box) return;
+  var btns = Array.prototype.slice.call(box.querySelectorAll('.year-btn'));
+  function closeAll(except){
+    btns.forEach(function(b){
+      if(b === except) return;
+      var panel = document.getElementById(b.getAttribute('aria-controls'));
+      b.setAttribute('aria-expanded','false');
+      if(panel) panel.hidden = true;
+    });
+  }
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var panel = document.getElementById(b.getAttribute('aria-controls'));
+      var isOpen = b.getAttribute('aria-expanded') === 'true';
+      closeAll(b);
+      if(isOpen){
         b.setAttribute('aria-expanded','false');
         if(panel) panel.hidden = true;
-      });
-    }
-    btns.forEach(function(b){
-      b.addEventListener('click', function(){
-        var panel = document.getElementById(b.getAttribute('aria-controls'));
-        var isOpen = b.getAttribute('aria-expanded') === 'true';
-        closeAll(b);
-        if(isOpen){
-          b.setAttribute('aria-expanded','false');
-          if(panel) panel.hidden = true;
-        } else {
-          b.setAttribute('aria-expanded','true');
-          if(panel) panel.hidden = false;
-        }
-      });
+      } else {
+        b.setAttribute('aria-expanded','true');
+        if(panel) panel.hidden = false;
+      }
     });
-  })();
+  });
 })();
 </script>
 </body>
