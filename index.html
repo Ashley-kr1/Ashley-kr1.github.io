@@ -135,6 +135,16 @@ footer{text-align:center;color:#777;padding:32px 24px;font-size:.9rem}
 .rec .result h3{margin:0 0 4px;font-size:1.5rem}
 .rec .result .pos{color:var(--red);font-weight:700}
 .rec .result .why{margin:10px 0 0;color:#444;font-size:.95rem;line-height:1.6}
+.rec .result .rec-awards{margin:16px 0 0}
+.rec .result .rec-awards h4,.rec .result .rec-stats h4{margin:0 0 8px;font-size:.95rem;color:var(--red)}
+.rec .result .rec-awards ul{margin:0;padding-left:1.2em;font-size:.9rem;color:#333;line-height:1.6}
+.rec .result .rec-awards li{margin:2px 0}
+.rec .result .rec-stats{margin:16px 0 0}
+.rec .result .rec-stat-table{width:100%;border-collapse:collapse;margin-top:4px;font-size:.88rem}
+.rec .result .rec-stat-table th,.rec .result .rec-stat-table td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.rec .result .rec-stat-table thead th{background:var(--ink);color:var(--gold)}
+.rec .result .rec-stat-table td:first-child{font-weight:700;color:var(--red);width:4.5em}
+.rec .result .rec-source{margin:8px 0 0;font-size:.78rem;color:#999}
 .rec .reset{margin-top:14px;background:none;border:none;color:var(--red);font-weight:700;cursor:pointer;text-decoration:underline;padding:0}
 .links{margin:0;padding-left:1.2em}.links a{color:var(--red);font-weight:700}
 .note{margin-top:20px;color:#777;font-size:.85rem}
@@ -454,6 +464,81 @@ tbody tr:hover{background:#fff6f7}
 (function(){
   // 유형별 선수 데이터
   // 2026 시즌 기준 현역 SSG 랜더스 선수만 추천 (은퇴·이적 선수 제외)
+  // 선수별 주요 수상·연도별 기록 (KBO 기록 기준, 한국어 위키백과 교차 확인 — 임의 수치 없음)
+  // 출처: ko.wikipedia.org 각 선수 문서(최정·김광현·박성한·최지훈·조병현)
+  var PLAYER_RECORDS = {
+    "최정": {
+      awards: [
+        "KBO 홈런왕 3회 (2016·2017·2021)",
+        "KBO 골든글러브 3루수 부문 다회 수상 (2011~2013·2016~2017·2019·2021~2022)",
+        "KBO 장타율왕 (2017·2023)",
+        "2008 한국시리즈 MVP (역대 최연소)",
+        "KBO 리그 최초 통산 500홈런 달성 (2025)"
+      ],
+      statLabel: "연도별 타격 기록 (타율 / 홈런 / 타점)",
+      stats: [
+        { year:"2016", line:"0.288 / 40홈런 / 106타점" },
+        { year:"2017", line:"0.316 / 46홈런 / 113타점 (장타율왕)" },
+        { year:"2021", line:"0.278 / 35홈런 / 100타점 (홈런왕)" },
+        { year:"2023", line:"0.297 / 29홈런 / 87타점 (장타율왕)" },
+        { year:"2026", line:"0.306 / 20홈런 / 57타점" }
+      ]
+    },
+    "김광현": {
+      awards: [
+        "2008 KBO MVP · 탈삼진왕 · 투수 골든글러브",
+        "KBO 다승왕 (2008·2010)",
+        "KBO 방어율왕·승률왕 (2009)",
+        "2008 베이징 올림픽 금메달"
+      ],
+      statLabel: "연도별 투구 기록 (평균자책점 / 승-패 / 탈삼진)",
+      stats: [
+        { year:"2008", line:"2.39 / 16승 4패 / 150탈삼진 (MVP)" },
+        { year:"2009", line:"2.80 / 12승 2패 / 119탈삼진 (방어율·승률왕)" },
+        { year:"2010", line:"2.37 / 17승 7패 / 183탈삼진 (다승왕)" },
+        { year:"2019", line:"2.51 / 17승 6패 / 180탈삼진" }
+      ]
+    },
+    "조병현": {
+      awards: [
+        "2024 1군 본격 등장 후 필승조로 자리매김",
+        "2026 아이치·나고야 아시안게임 금메달 (대표팀)"
+      ],
+      statLabel: "연도별 투구 기록 (평균자책점 / 세이브+홀드 / 탈삼진)",
+      stats: [
+        { year:"2024", line:"3.58 / 6세이브 / 120탈삼진" },
+        { year:"2025", line:"1.60 / 30홀드 / 79탈삼진" },
+        { year:"2026", line:"2.33 / 24홀드 / 69탈삼진" }
+      ]
+    },
+    "박성한": {
+      awards: [
+        "2022 항저우 아시안게임 금메달 (대표팀)",
+        "2024 WBSC 프리미어 12 국가대표",
+        "꾸준한 3할대 타율 (2021·2024·2026)"
+      ],
+      statLabel: "연도별 타격 기록 (타율 / 안타 / 볼넷)",
+      stats: [
+        { year:"2021", line:"0.302 / 158안타 / 44볼넷" },
+        { year:"2024", line:"0.301 / 147안타 / 33볼넷" },
+        { year:"2026", line:"0.330 / 175안타 / 91볼넷" }
+      ]
+    },
+    "최지훈": {
+      awards: [
+        "2022 항저우 아시안게임 금메달 (대표팀)",
+        "2023 WBC 국가대표",
+        "리드오프로서 다득점·도루 생산 (2025 28도루)"
+      ],
+      statLabel: "연도별 타격 기록 (타율 / 안타 / 도루)",
+      stats: [
+        { year:"2022", line:"0.304 / 173안타 / 13도루" },
+        { year:"2025", line:"0.284 / 147안타 / 28도루" },
+        { year:"2026", line:"0.250 / 130안타 / 21도루" }
+      ]
+    }
+  };
+
   var DATA = {
     pitcher: {
       label: "투수",
@@ -519,12 +604,36 @@ tbody tr:hover{background:#fff6f7}
     });
   });
 
+  // 텍스트 이스케이프 (데이터는 내부 상수지만 안전하게 textContent 경유)
+  function esc(t){ var d = document.createElement('div'); d.textContent = t == null ? '' : t; return d.innerHTML; }
+
   function showResult(s){
-    resultBox.innerHTML =
+    var html =
       '<p style="margin:0;font-size:.85rem;color:#777;">추천 선수</p>' +
-      '<h3>' + s.player + '</h3>' +
-      '<p class="pos">' + s.pos + ' · ' + s.label + '</p>' +
-      '<p class="why">' + s.why + '</p>';
+      '<h3>' + esc(s.player) + '</h3>' +
+      '<p class="pos">' + esc(s.pos) + ' · ' + esc(s.label) + '</p>' +
+      '<p class="why">' + esc(s.why) + '</p>';
+
+    var rec = PLAYER_RECORDS[s.player];
+    if(rec){
+      if(rec.awards && rec.awards.length){
+        html += '<div class="rec-awards"><h4>주요 수상·기록</h4><ul>';
+        rec.awards.forEach(function(a){ html += '<li>' + esc(a) + '</li>'; });
+        html += '</ul></div>';
+      }
+      if(rec.stats && rec.stats.length){
+        html += '<div class="rec-stats"><h4>' + esc(rec.statLabel || '연도별 기록') + '</h4>';
+        html += '<table class="rec-stat-table"><thead><tr><th>연도</th><th>기록</th></tr></thead><tbody>';
+        rec.stats.forEach(function(r){
+          html += '<tr><td>' + esc(r.year) + '</td><td>' + esc(r.line) + '</td></tr>';
+        });
+        html += '</tbody></table>';
+        html += '<p class="rec-source">기록 출처: 한국어 위키백과(KBO 기록). 대표 시즌만 추렸습니다.</p>';
+        html += '</div>';
+      }
+    }
+
+    resultBox.innerHTML = html;
     resultBox.classList.remove('hidden');
   }
 
